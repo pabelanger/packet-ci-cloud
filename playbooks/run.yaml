@@ -1,0 +1,6 @@
+- hosts: all
+  tasks:
+    - name: bootstrap deployment host
+      shell: scripts/bootstrap-ansible.sh
+      args:
+        chdir: "{{ zuul.projects['git.openstack.org/openstack/openstack-ansible'].src_dir }}"
