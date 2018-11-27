@@ -1,0 +1,7 @@
+- job:
+    name: packet-ci-cloud-test
+    pre-run: playbooks/pre-run.yaml
+    run: playbooks/run.yaml
+    required-projects:
+      - name: git.openstack.org/openstack/openstack-ansible
+    nodeset: centos-7-1vcpu
