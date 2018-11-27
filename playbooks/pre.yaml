@@ -1,0 +1,27 @@
+- hosts: all
+  tasks:
+    - name: Run bindep role
+      include_role:
+        name: bindep
+      vars:
+        bindep_dir: "{{ zuul.project.src_dir }}"
+
+    - name: Setup SSH config
+      become: true
+      copy:
+        dest: /root/.ssh/config
+        src: root/.ssh/config
+
+    - name: Setup known_hosts for SSH
+      become: true
+      known_hosts:
+        name: 147.75.50.187
+        key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBl5nJXl61dHqUTFL6MRhXG+v6Z47Euht0LxK7wIjRsQ
+
+    - name: echo
+      become: true
+      shell: cat ~/.ssh/known_hosts
+
+    - name: test
+      become: true
+      shell: ssh root@172.29.236.2
